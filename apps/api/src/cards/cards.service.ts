@@ -155,4 +155,29 @@ export class CardsService {
 
     return false;
   }
+
+  async getCardWeaknessesAndResistances(id: number) {
+    const card = await this.findOne(id);
+
+    const weaknessTypeIds = card.weaknesses.map((weakness) => weakness.type.id);
+    const resistanceTypeIds = card.resistances.map(
+      (resistance) => resistance.type.id,
+    );
+
+    const cardsWeakAgainst = await this.cardsRepository
+      .createQueryBuilder('card')
+      .leftJoinAndSelect('card.types', 'types')
+      .where('types.id IN (:...typeIds)', { typeIds: weaknessTypeIds })
+      .andWhere('card.id != :id', { id: card.id })
+      .getMany();
+
+    const cardsResistantTo = await this.cardsRepository
+      .createQueryBuilder('card')
+      .leftJoinAndSelect('card.types', 'types')
+      .where('types.id IN (:...typeIds)', { typeIds: resistanceTypeIds })
+      .andWhere('card.id != :id', { id: card.id })
+      .getMany();
+
+    return { cardsWeakAgainst, cardsResistantTo };
+  }
 }

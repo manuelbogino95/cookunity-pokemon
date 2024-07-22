@@ -45,4 +45,9 @@ export class CardsController {
   async battle(@Body() battleDto: BattleDto): Promise<boolean> {
     return this.cardsService.battle(battleDto);
   }
+
+  @Get(':id/weaknesses-resistances')
+  async getCardWeaknessesAndResistances(@Param('id') id: string) {
+    return this.cardsService.getCardWeaknessesAndResistances(Number(id));
+  }
 }
