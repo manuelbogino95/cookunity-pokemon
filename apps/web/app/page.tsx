@@ -1,9 +1,16 @@
-export default function Home() {
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { getQueryClient } from "../utils/getQueryClient";
+import { PokemonList } from "./pokemonList";
+import { getCardsQueryOptions } from "../utils/queries";
+
+export default async function HomePage() {
+	const queryClient = getQueryClient();
+
+	await queryClient.prefetchQuery(getCardsQueryOptions);
+
 	return (
-		<div>
-			<main>
-				<h1 className="text-3xl font-bold underline">Pokemon cards</h1>
-			</main>
-		</div>
+		<HydrationBoundary state={dehydrate(queryClient)}>
+			<PokemonList />
+		</HydrationBoundary>
 	);
 }

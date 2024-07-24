@@ -31,7 +31,7 @@ const cardsData = [
     resistances: [],
   },
   {
-    name: 'Feraligart',
+    name: 'Feraligatr',
     hp: 180,
     attackPower: 160,
     types: ['Water'],

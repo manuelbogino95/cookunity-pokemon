@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Patch,
+  Res,
 } from '@nestjs/common';
 import { CardsService } from './cards.service';
 import { CreateCardDto } from './dto/create-card.dto';
@@ -42,7 +43,9 @@ export class CardsController {
   }
 
   @Post('battle')
-  async battle(@Body() battleDto: BattleDto): Promise<boolean> {
+  async battle(@Body() battleDto: BattleDto): Promise<{
+    succeeded: boolean;
+  }> {
     return this.cardsService.battle(battleDto);
   }
 

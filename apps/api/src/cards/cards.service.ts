@@ -116,7 +116,7 @@ export class CardsService {
   async battle({
     attackerCardId,
     defenderCardId,
-  }: BattleDto): Promise<boolean> {
+  }: BattleDto): Promise<{ succeeded: boolean }> {
     const attackerCard = await this.findOne(attackerCardId);
     const defenderCard = await this.findOne(defenderCardId);
 
@@ -150,10 +150,14 @@ export class CardsService {
     });
 
     if (damage >= defenderCard.hp) {
-      return true;
+      return {
+        succeeded: true,
+      };
     }
 
-    return false;
+    return {
+      succeeded: false,
+    };
   }
 
   async getCardWeaknessesAndResistances(id: number) {
