@@ -1,81 +1,72 @@
-# Turborepo starter
+# Pokemon app
 
-This is an official starter Turborepo.
+## Introduction
 
-## Using this example
+This project is a full-stack web application developed as part of a coding challenge for a job position. The application is built using Turborepo, NestJS, and Next.js. The backend is powered by NestJS, providing a robust and scalable API, while the frontend is developed using Next.js, offering server-side rendering and a seamless user experience.
 
-Run the following command:
+## Technologies Used
 
-```sh
-npx create-turbo@latest
-```
-
-## What's inside?
-
-This Turborepo includes the following packages/apps:
+- Turborepo: High-performance build system for JavaScript and TypeScript codebases.
+- NestJS: A progressive Node.js framework for building efficient and scalable server-side applications.
+- Next.js: A React framework for server-side rendering and generating static websites.
+- TypeScript: A strongly typed programming language that builds on JavaScript.
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
+- `web`: pokemon web app built using [Next.js](https://nextjs.org/)
+- `api`: pokemon api built using [NestJS](https://nestjs.com/)
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-### Utilities
+### Installation
 
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
+1- Clone the repository:
 
 ```
-cd my-turborepo
-pnpm build
+git clone https://github.com/manuelbogino95/cookunity-pokemon.git
+cd cookunity-pokemon
 ```
 
-### Develop
-
-To develop all apps and packages, run the following command:
+2- Install dependencies:
 
 ```
-cd my-turborepo
+pnpm install
+```
+
+3- Create a new postgress database.
+
+4- Add environment variables:
+
+- Web (Next.js app):
+
+```
+NEXT_PUBLIC_API_BASE_URL=http://localhost:3001
+NEXT_PUBLIC_POKEMON_IMAGES_API_URL=https://img.pokemondb.net
+```
+
+- API (NestJS app):
+
+```
+PORT=3001
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_USERNAME=<my-username>
+DATABASE_PASSWORD=<my-password>
+DATABASE=<database-name>
+```
+
+5- Seed the database:
+
+```
+pnpm seed
+```
+
+6- Run the application:
+
+```
 pnpm dev
 ```
 
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+To use the application, navigate to http://localhost:3000 in your web browser. The frontend will communicate with the backend API to perform various operations.
